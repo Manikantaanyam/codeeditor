@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Preview from "./Preview";
 import TextArea from "./TextArea";
-import { useRecoilState } from "recoil";
-import {
-  cssAtom,
-  htmlAtom,
-  jsAtom,
-  srcDocAtom,
-} from "../Store/Atoms/EditorAtoms";
 
 const Editor = () => {
-  const [html, setHtml] = useRecoilState(htmlAtom);
-  const [css, setCss] = useRecoilState(cssAtom);
-  const [js, setJs] = useRecoilState(jsAtom);
-  const [srcDoc, setSrcDoc] = useRecoilState(srcDocAtom);
+  const [html, setHtml] = useState("");
+  const [css, setCss] = useState("");
+  const [js, setJs] = useState("");
+  const [srcDoc, setSrcDoc] = useState("");
   const [tab, setTab] = useState("html");
 
   useEffect(() => {
@@ -77,6 +70,7 @@ const Editor = () => {
             <div>
               {tab === "html" && (
                 <TextArea
+                  value={html}
                   placeholder={"<h1> Welcome to code editor </h1>"}
                   onChange={(e) => setHtml(e.target.value)}
                 />
@@ -84,6 +78,7 @@ const Editor = () => {
 
               {tab === "css" && (
                 <TextArea
+                  value={css}
                   placeholder={`
 h1{
    color:red;
@@ -95,6 +90,7 @@ h1{
 
               {tab === "js" && (
                 <TextArea
+                  value={js}
                   placeholder={"console.log('anyam')"}
                   onChange={(e) => setJs(e.target.value)}
                 />

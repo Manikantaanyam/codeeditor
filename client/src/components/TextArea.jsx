@@ -1,7 +1,8 @@
-const TextArea = ({ onChange, placeholder }) => {
+const TextArea = ({ onChange, value, placeholder }) => {
   return (
     <div className="h-screen">
       <textarea
+        value={value}
         onChange={onChange}
         spellCheck="false"
         id="message"
