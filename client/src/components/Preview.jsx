@@ -3,7 +3,9 @@ import React from "react";
 const Preview = ({ srcDoc }) => {
   return (
     <div className="h-screen">
-      <h3 className="font-bold text-xl">output</h3>
+      <button className="px-4 py-2 bg-black text-white rounded-md mb-2">
+        output
+      </button>
       <iframe
         srcDoc={srcDoc}
         title="output"

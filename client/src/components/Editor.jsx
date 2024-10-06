@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TextArea from "./TextArea";
 import Preview from "./Preview";
+import TextArea from "./TextArea";
 
 const Editor = () => {
   const [html, setHtml] = useState("");
@@ -38,8 +38,8 @@ const Editor = () => {
                 onClick={() => {
                   setTab("html");
                 }}
-                className={`bg-black rounded-md border  border-gray-300  px-4 py-2 text-white ${
-                  tab === "html" ? "bg-black" : "bg-white text-black"
+                className={`bg-black rounded-md border  border-gray-300  px-4 py-2 text-black ${
+                  tab === "html" ? "bg-black text-white" : "bg-white text-black"
                 }`}
               >
                 html
@@ -48,8 +48,8 @@ const Editor = () => {
                 onClick={() => {
                   setTab("css");
                 }}
-                className={`bg-black rounded-md border border-gray-300 px-4 py-2 text-white ${
-                  tab === "css" ? "bg-black" : "bg-white text-black"
+                className={`bg-black rounded-md border border-gray-300 px-4 py-2 text-black ${
+                  tab === "css" ? "bg-black text-white" : "bg-white text-black"
                 }`}
               >
                 css
@@ -58,8 +58,8 @@ const Editor = () => {
                 onClick={() => {
                   setTab("js");
                 }}
-                className={`bg-black  rounded-md border border-gray-300 px-4 py-2 text-white ${
-                  tab === "js" ? "bg-black" : "bg-white text-black"
+                className={`bg-black  rounded-md border border-gray-300 px-4 py-2 text-black ${
+                  tab === "js" ? "bg-black text-white" : "bg-white text-black"
                 }`}
               >
                 js
