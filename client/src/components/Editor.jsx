@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Preview from "./Preview";
 import TextArea from "./TextArea";
+import { useRecoilState } from "recoil";
+import {
+  cssAtom,
+  htmlAtom,
+  jsAtom,
+  srcDocAtom,
+} from "../Store/Atoms/EditorAtoms";
 
 const Editor = () => {
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
-  const [srcDoc, setSrcDoc] = useState("");
+  const [html, setHtml] = useRecoilState(htmlAtom);
+  const [css, setCss] = useRecoilState(cssAtom);
+  const [js, setJs] = useRecoilState(jsAtom);
+  const [srcDoc, setSrcDoc] = useRecoilState(srcDocAtom);
   const [tab, setTab] = useState("html");
 
   useEffect(() => {
