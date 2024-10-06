@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import TextArea from "./TextArea";
+import Preview from "./Preview";
 
 const Editor = () => {
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
   const [srcDoc, setSrcDoc] = useState("");
+  const [tab, setTab] = useState("html");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -21,40 +24,81 @@ const Editor = () => {
   }, [html, css, js]);
 
   return (
-    <div className="w-[100vw]  flex flex-col">
-      <div className="grid grid-cols-3 gap-4">
-        <TextArea label={"Html"} onChange={(e) => setHtml(e.target.value)} />
-        <TextArea label={"Css"} onChange={(e) => setCss(e.target.value)} />
-        <TextArea label={"Js"} onChange={(e) => setJs(e.target.value)} />
+    <div className="overflow-y-hidden">
+      <div className="w-full  p-2 py-4 border border-b shadow-md pb-4">
+        <h1 className="font-extrabold text-2xl pl-10">
+          HTML, CSS, JS Compiler
+        </h1>
       </div>
-      <div className="mt-10">
-        <iframe
-          srcDoc={srcDoc}
-          title="output"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          width="100%"
-          height="300px"
-          style={{ border: "1px solid black" }}
-        />
-      </div>
-    </div>
-  );
-};
+      <div className="w-[100vw] p-4 overflow-y-hidden grid grid-cols-2">
+        <div>
+          <div className="flex justify-between pb-2">
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setTab("html");
+                }}
+                className={`bg-black rounded-md border  border-gray-300  px-4 py-2 text-white ${
+                  tab === "html" ? "bg-black" : "bg-white text-black"
+                }`}
+              >
+                html
+              </button>
+              <button
+                onClick={() => {
+                  setTab("css");
+                }}
+                className={`bg-black rounded-md border border-gray-300 px-4 py-2 text-white ${
+                  tab === "css" ? "bg-black" : "bg-white text-black"
+                }`}
+              >
+                css
+              </button>
+              <button
+                onClick={() => {
+                  setTab("js");
+                }}
+                className={`bg-black  rounded-md border border-gray-300 px-4 py-2 text-white ${
+                  tab === "js" ? "bg-black" : "bg-white text-black"
+                }`}
+              >
+                js
+              </button>
+            </div>
+          </div>
+          <div className="w-full h-screen bg-gray-300">
+            <div>
+              {tab === "html" && (
+                <TextArea
+                  placeholder={"<h1> Welcome to code editor </h1>"}
+                  onChange={(e) => setHtml(e.target.value)}
+                />
+              )}
 
-const TextArea = ({ onChange, label }) => {
-  return (
-    <div className="h-[60vh]">
-      <label for="message" class="block mb-2 text-sm font-medium text-gray-900">
-        {label}
-      </label>
-      <textarea
-        onChange={onChange}
-        id="message"
-        rows="4"
-        class="block p-2.5 w-full h-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Write your thoughts here..."
-      ></textarea>
+              {tab === "css" && (
+                <TextArea
+                  placeholder={`
+h1{
+   color:red;
+}
+                `}
+                  onChange={(e) => setCss(e.target.value)}
+                />
+              )}
+
+              {tab === "js" && (
+                <TextArea
+                  placeholder={"console.log('anyam')"}
+                  onChange={(e) => setJs(e.target.value)}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="h-screen">
+          <Preview srcDoc={srcDoc} />
+        </div>
+      </div>
     </div>
   );
 };
